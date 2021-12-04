@@ -82,13 +82,16 @@ abline(0,1)
 
 # 2D plot analysis
 attach(mtcars)
-par(mfrow=c(2,2))
+par(mfrow=c(2,3))
 # Weight vs x axis, clear negative correlation
 plot(typewriters$V5, model2$points[, 1],
      main = "weight vs x axis")
 # depth vs x axis, strong negative correlation
 plot(typewriters$V4, model2$points[, 1],
      main = "Depth vs x axis")
+# height vs x axis, negative correlation
+plot(typewriters$V2, model2$points[, 1],
+     main = "Height vs x axis")
 # width vs x axis, negative correlation
 plot(typewriters$V3, model2$points[, 1],
      main = "Width vs x axis")
@@ -103,7 +106,9 @@ plot(typewriters$V2, model2$points[, 2],
 par(mfrow=c(1,1))
 # 3D Model and comparisons to input distance matrix
 model3 <- cmdscale(distance, k=3, eig=TRUE)
-s3d <- scatterplot3d(model3$points[, 1:3], angle = 60)
+s3d <- scatterplot3d(model3$points[, 1:3], angle = 60,
+                     xlim = c(-4, 4), ylim = c(-4, 4), zlim = c(-4, 4),
+                     xlab = "X Axis", ylab = "Y Axis", zlab = "Z Axis")
 text(s3d$xyz.convert(model3$points[, 1:3]), labels = typewriters$V1,
      cex= 0.7, col = "steelblue")
 for3Dplot <- data.frame(model3$points, 0)
